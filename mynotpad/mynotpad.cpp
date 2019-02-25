@@ -8,6 +8,8 @@ mynotpad::mynotpad(QWidget *parent)
 	QObject::connect(ui.newAction, SIGNAL(triggered()), this, SLOT(newFileSlot()));
 	QObject::connect(ui.openAction, SIGNAL(triggered()), this, SLOT(openFileSlot()));
 	QObject::connect(ui.saveAction, SIGNAL(triggered()), this, SLOT(saveFileSlot()));
+	QObject::connect(ui.saveasAction, SIGNAL(triggered()), this, SLOT(saveAsFileSlot()));
+	QObject::connect(ui.exitAction, SIGNAL(triggered()), this, SLOT(close ()));
 }
 
 void mynotpad::newFileSlot()
@@ -52,20 +54,42 @@ void mynotpad::openFileSlot()
 }
 void mynotpad::saveFileSlot()
 {
-	QString fileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath());
-	if (fileName.isEmpty())
+	if (saveFileName.isEmpty())
+	{
+		this->saveAsFileSlot();
+	}
+	else
+	{
+		QFile *file = new QFile;
+		file->setFileName(saveFileName);
+		bool ok = file->open(QIODevice::WriteOnly);
+		if (ok)
+		{
+			QTextStream out(file);
+			out << ui.textEdit->toPlainText();//这里是去除textEdit当中的纯文本
+			file->close();
+			this->setWindowTitle(saveFileName + "---------notpad");
+			delete file;
+		}
+	}
+}
+void mynotpad::saveAsFileSlot()
+{
+	QString saveFileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath());
+	if (saveFileName.isEmpty())
 	{
 		QMessageBox::information(this, "Error Message", "Please Select A File");
 		return;
 	}
 	QFile *file = new QFile;
-	file->setFileName(fileName);
+	file->setFileName(saveFileName);
 	bool ok = file->open(QIODevice::WriteOnly);
 	if (ok)
 	{
 		QTextStream out(file);
 		out << ui.textEdit->toPlainText();//这里是去除textEdit当中的纯文本
 		file->close();
+		this->setWindowTitle(saveFileName + "---------notpad");
 		delete file;
 	}
 	else

@@ -17,8 +17,8 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>-20</x>
-      <y>-10</y>
+      <x>0</x>
+      <y>0</y>
       <width>611</width>
       <height>351</height>
      </rect>
@@ -41,11 +41,23 @@
     <addaction name="newAction"/>
     <addaction name="openAction"/>
     <addaction name="saveAction"/>
-    <addaction name="action_A"/>
+    <addaction name="saveasAction"/>
     <addaction name="action_P"/>
-    <addaction name="action_E"/>
+    <addaction name="exitAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_E">
+    <property name="title">
+     <string>编辑（&amp;E）</string>
+    </property>
+    <addaction name="undoAction"/>
+    <addaction name="redoAction"/>
+    <addaction name="copyAction"/>
+    <addaction name="cutAction"/>
+    <addaction name="selectAllAction"/>
+    <addaction name="datetimeAction"/>
    </widget>
    <addaction name="menu_F"/>
+   <addaction name="menu_E"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -71,7 +83,7 @@
     <string>保存（&amp;S）</string>
    </property>
   </action>
-  <action name="action_A">
+  <action name="saveasAction">
    <property name="text">
     <string>另存为（&amp;A）</string>
    </property>
@@ -81,9 +93,39 @@
     <string>打印（&amp;P）</string>
    </property>
   </action>
-  <action name="action_E">
+  <action name="exitAction">
    <property name="text">
     <string>退出（&amp;E）</string>
+   </property>
+  </action>
+  <action name="undoAction">
+   <property name="text">
+    <string>撤销（&amp;U）</string>
+   </property>
+  </action>
+  <action name="redoAction">
+   <property name="text">
+    <string>重做（&amp;R）</string>
+   </property>
+  </action>
+  <action name="copyAction">
+   <property name="text">
+    <string>复制（&amp;C）</string>
+   </property>
+  </action>
+  <action name="cutAction">
+   <property name="text">
+    <string>剪切（&amp;X）</string>
+   </property>
+  </action>
+  <action name="selectAllAction">
+   <property name="text">
+    <string>粘贴（&amp;P）</string>
+   </property>
+  </action>
+  <action name="datetimeAction">
+   <property name="text">
+    <string>日期（&amp;D）</string>
    </property>
   </action>
  </widget>
